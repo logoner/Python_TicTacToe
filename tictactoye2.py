@@ -7,11 +7,18 @@
 
 # lets run game
 
+import os
+
 # initiations global arguments:
 cells = ['a1','a2','a3','b1','b2','b3','c1','c2','c3']
 
 # define game function
     
+# clear console screen
+clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
+#use clear
+#clear()
+
 #transform list to string
 def lsttostr(lstin):
     strout = str()
@@ -149,7 +156,7 @@ def aichngegp(gpin):
         #print('test')
     #X??
     #_O?
-    #_?X
+    #*?X
     elif gplst[0]+gplst[3]+gplst[6]+gplst[4]+gplst[8] == 'X__OX':
         gplst[6] = 'O'
         print('test')
@@ -157,26 +164,26 @@ def aichngegp(gpin):
     #test defens from beast_th
     #XXO
     #OOX
-    #X__
+    #X*_
     elif gpin == 'XXOOOXX__':
         gplst[7] = 'O'
     #OX_
-    #XO_
+    #XO*
     #XOX
     elif gpin == 'OX_XO_XOX':
         gplst[5] = 'O'
-    #__X
+    #_*X
     #XOO
     #OXX
     elif gpin == '__XXOOOXX':
         gplst[1] = 'O'
     #XOX
     #_OX
-    #_XO
+    #*XO
     elif gpin == 'XOX_OX_XO':
-        gplst[7] = 'O'
+        gplst[6] = 'O'
     #
-    #O__
+    #O*_
     #OXX
     #X__
     elif gpin == 'O__OXXX__':
@@ -335,17 +342,147 @@ def chkgmestate(gpin):
             win = True
 
     return win
+    
 #draw game area screen
 def drawgmescrn(gpin):
     
     #
+    clear()
     print('')
     print('\t_|1|2|3|')
     print('\tA|'+gpin[0]+'|'+gpin[1]+'|'+gpin[2]+'|')
     print('\tB|'+gpin[3]+'|'+gpin[4]+'|'+gpin[5]+'|')
     print('\tC|'+gpin[6]+'|'+gpin[7]+'|'+gpin[8]+'|')
     print('')
+
+#no winners check
+def nowinnerschk(gpin):
+    #XXO
+    #OOX
+    #XOX
+    if gpin == 'XXOOOXXOX':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+
+    #OXX
+    #XOO
+    #XOX
+    elif gpin == 'OXXXOOXOX':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                
+    #XOX
+    #XOO
+    #OXX
+    elif gp == 'XOXXOOOXC':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                
+    #XOX
+    #OOX
+    #XXO
+    elif gp == 'XOXOOXXXO':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+
+    #
+    #OXO
+    #XXO
+    #XOX
+    elif gp == 'OXOXXOXOX':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+           
+    #XXO
+    #OXX
+    #XOO
+    elif gp == 'XXOOXXXOO':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                
+    #XOX
+    #OXX
+    #OXO
+    elif gp == 'XOXOXXOXO':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                
+    #OOX
+    #XXO
+    #OXX
+    elif gp == 'OOXXXOOXX':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+    #
+    #OXX
+    #XXO
+    #OOX
+    elif gp == 'OXXXXOOOX':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                    
+    #OXO
+    #OXX
+    #XOX
+    #elif gp == 'OXOOXXXOX':
+    #    drawgmescrn(gp)
+    #    print('\tNo winners!')
+    #    gameover = True
+    #    break
+                    
+    #XOO
+    #OXX
+    #XXO
+    elif gp == 'XOOOXXXXO':
+        drawgmescrn(gpin)
+        print('\tNo winners!')
+        input('\tEnter any key for back:')
+        return True
+                    
+    #XOX
+    #XXO
+    #OXO
+    #elif gp == 'XOXXXOOXO':
+    #    drawgmescrn(gp)
+    #    print('\tNo winners!')
+    #    gameover = True
+    #    break
+
+    # The next step - to add the symbol 'O' in the first empty cell.
+    calc = 0
+    for cellchk in gp:
+                   
+        gameover = False
+        if cellchk == '_':
+            calc = calc + 1
+                        
+            if calc == 0:
+                drawgmescrn(gpin)
+                print('\tNo winners!')
+                input('\tEnter any key for back:')
+                return True
     
+    else:
+        return False
+
 # end of define functions
 
 
@@ -362,6 +499,7 @@ while exitgame == False:
     gp = '_________'
     
     # draw menu screen
+    clear()
     print('')
     print('\tTicTacToy:')
     print('\tMenu:')
@@ -373,6 +511,7 @@ while exitgame == False:
     
     if mnu == '2':
         # draw score screen
+        clear()
         print('')
         print('\tTicTacToy:')
         print('\tScore:')
@@ -380,6 +519,7 @@ while exitgame == False:
         print('\tAI wins:', aiscore)
         print('')
         input('\tEnter any key for back:')
+    
     elif mnu == '1':
         gameover = False
         while gameover == False:
@@ -423,127 +563,8 @@ while exitgame == False:
                     break
                 
                 #no winners check
-                #XXO
-                #OOX
-                #XOX
-                if gp == 'XXOOOXXOX':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
+                gameover = nowinnerschk(gp)
+                if gameover == True:
                     break
-                
-                #OXX
-                #XOO
-                #XOX
-                elif gp == 'OXXXOOXOX':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                
-                #XOX
-                #XOO
-                #OXX
-                elif gp == 'XOXXOOOXC':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                
-                #XOX
-                #OOX
-                #XXO
-                elif gp == 'XOXOOXXXO':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-
-                #
-                #OXO
-                #XXO
-                #XOX
-                elif gp == 'OXOXXOXOX':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                
-                #XXO
-                #OXX
-                #XOO
-                elif gp == 'XXOOXXXOO':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                
-                #XOX
-                #OXX
-                #OXO
-                elif gp == 'XOXOXXOXO':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                
-                #OOX
-                #XXO
-                #OXX
-                elif gp == 'OOXXXOOXX':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                #
-                #OXX
-                #XXO
-                #OOX
-                elif gp == 'OXXXXOOOX':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                    
-                #OXO
-                #OXX
-                #XOX
-                #elif gp == 'OXOOXXXOX':
-                #    drawgmescrn(gp)
-                #    print('\tNo winners!')
-                #    gameover = True
-                #    break
-                    
-                #XOO
-                #OXX
-                #XXO
-                elif gp == 'XOOOXXXXO':
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break
-                    
-                #XOX
-                #XXO
-                #OXO
-                #elif gp == 'XOXXXOOXO':
-                #    drawgmescrn(gp)
-                #    print('\tNo winners!')
-                #    gameover = True
-                #    break
-                
-                calc = 0
-                for cellchk in gp:
-                   
-                    gameover = False
-                    if cellchk == '_':
-                        calc = calc + 1
-                        
-                if calc == 0:
-                    drawgmescrn(gp)
-                    print('\tNo winners!')
-                    gameover = True
-                    break   
-
     else:
         exitgame = True
